@@ -1,0 +1,71 @@
+{
+  "name": "Phaserito",
+  "version": "0.2.2",
+  "description": "A Phaser.io Boilerplate using ES6, Traceur and Gulp",
+  "author": "Lovely Dog Studio",
+  "google": {
+    "analytics": "UA-58578359-1"
+  },
+  "contributors": [
+    {
+      "name": "Bernat Martinez"
+    },
+    {
+      "name": "Nestor Hernandez"
+    },
+    {
+      "name": "Abraham Alcaina"
+    },
+    {
+      "name": "Xavi Serra"
+    }
+  ],
+  "dependencies": {
+    "bluebird": "~2.9.3",
+    "console-polyfill": "~0.1.2",
+    "httpplease": "~0.15.2",
+    "phaser": "~2.2.2"
+  },
+  "devDependencies": {
+    "audiosprite": "^0.4.0",
+    "css-loader": "~0.9.1",
+    "exports-loader": "^0.6.2",
+    "file-loader": "~0.8.1",
+    "gulp": "~3.8.10",
+    "gulp-karma": "0.0.4",
+    "gulp-plato": "^1.0.2",
+    "gulp-util": "~3.0.2",
+    "gulp-zip": "~2.0.2",
+    "html-webpack-plugin": "^1.1.0",
+    "image-webpack-loader": "^1.2.0",
+    "imports-loader": "^0.6.3",
+    "istanbul": "^0.3.5",
+    "istanbul-instrumenter-loader": "^0.1.2",
+    "json-loader": "~0.5.1",
+    "karma": "^0.12.31",
+    "karma-chrome-launcher": "^0.1.7",
+    "karma-coverage": "^0.2.7",
+    "karma-firefox-launcher": "^0.1.4",
+    "karma-htmlfile-reporter": "^0.1.2",
+    "karma-jasmine": "^0.3.5",
+    "karma-phantomjs-launcher": "^0.1.4",
+    "karma-webpack": "~1.5.0",
+    "less-loader": "~2.0.0",
+    "localtunnel": "~1.5.0",
+    "phaser-debug": "~1.1.4",
+    "script-loader": "~0.6.1",
+    "stats-webpack-plugin": "^0.0.1",
+    "style-loader": "~0.8.3",
+    "traceur-loader": "~0.6.3",
+    "url-loader": "~0.5.5",
+    "webpack": "~1.5.3",
+    "webpack-dev-server": "~1.7.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bernatmv/phaserito.git"
+  },
+  "scripts": {
+    "test": "gulp travis"
+  }
+}

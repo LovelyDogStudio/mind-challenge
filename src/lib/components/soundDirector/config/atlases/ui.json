@@ -1,0 +1,114 @@
+{
+	"frames": {
+		"barLeftBack": {
+			"frame": {"x":123, "y":128, "w":20, "h":30},
+			"spriteSourceSize": {"x":0,"y":0,"w":20,"h":30},
+			"sourceSize": {"w":20,"h":30}
+		},
+		"barLeftFore": {
+			"frame": {"x":152, "y":63, "w":18, "h":26},
+			"spriteSourceSize": {"x":2,"y":2,"w":20,"h":30},
+			"sourceSize": {"w":20,"h":30}
+		},
+		"barMiddleBack": {
+			"frame": {"x":154, "y":0, "w":17, "h":30},
+			"spriteSourceSize": {"x":0,"y":0,"w":17,"h":30},
+			"sourceSize": {"w":17,"h":30}
+		},
+		"barMiddleFore": {
+			"frame": {"x":154, "y":31, "w":17, "h":26},
+			"spriteSourceSize": {"x":0,"y":2,"w":17,"h":30},
+			"sourceSize": {"w":17,"h":30}
+		},
+		"barRightBack": {
+			"frame": {"x":144, "y":128, "w":20, "h":30},
+			"spriteSourceSize": {"x":0,"y":0,"w":20,"h":30},
+			"sourceSize": {"w":20,"h":30}
+		},
+		"barRightFore": {
+			"frame": {"x":150, "y":98, "w":19, "h":26},
+			"spriteSourceSize": {"x":0,"y":2,"w":20,"h":30},
+			"sourceSize": {"w":20,"h":30}
+		},
+		"fxOnOut": {
+			"frame": {"x":82, "y":82, "w":40, "h":40},
+			"spriteSourceSize": {"x":0,"y":0,"w":40,"h":40},
+			"sourceSize": {"w":40,"h":40}
+		},
+		"fxOnDown": {
+			"frame": {"x":82, "y":0, "w":40, "h":40},
+			"spriteSourceSize": {"x":0,"y":0,"w":40,"h":40},
+			"sourceSize": {"w":40,"h":40}
+		},
+		"fxOnHover": {
+			"frame": {"x":82, "y":123, "w":40, "h":40},
+			"spriteSourceSize": {"x":0,"y":0,"w":40,"h":40},
+			"sourceSize": {"w":40,"h":40}
+		},
+		"fxOffOut": {
+			"frame": {"x":41, "y":123, "w":40, "h":40},
+			"spriteSourceSize": {"x":0,"y":0,"w":40,"h":40},
+			"sourceSize": {"w":40,"h":40}
+		},
+		"fxOffDown": {
+			"frame": {"x":0, "y":41, "w":40, "h":40},
+			"spriteSourceSize": {"x":0,"y":0,"w":40,"h":40},
+			"sourceSize": {"w":40,"h":40}
+		},
+		"fxOffHover": {
+			"frame": {"x":0, "y":0, "w":40, "h":40},
+			"spriteSourceSize": {"x":0,"y":0,"w":40,"h":40},
+			"sourceSize": {"w":40,"h":40}
+		},
+		"fxMute": {
+			"frame": {"x":123, "y":0, "w":30, "h":34},
+			"spriteSourceSize": {"x":5,"y":2,"w":40,"h":40},
+			"sourceSize": {"w":40,"h":40}
+		},
+		"fxNoMute": {
+			"frame": {"x":123, "y":35, "w":30, "h":27},
+			"spriteSourceSize": {"x":5,"y":6,"w":40,"h":40},
+			"sourceSize": {"w":40,"h":40}
+		},
+		"musicOnOut": {
+			"frame": {"x":82, "y":41, "w":40, "h":40},
+			"spriteSourceSize": {"x":0,"y":0,"w":40,"h":40},
+			"sourceSize": {"w":40,"h":40}
+		},
+		"musicOnDown": {
+			"frame": {"x":41, "y":82, "w":40, "h":40},
+			"spriteSourceSize": {"x":0,"y":0,"w":40,"h":40},
+			"sourceSize": {"w":40,"h":40}
+		},
+		"musicOnHover": {
+			"frame": {"x":41, "y":41, "w":40, "h":40},
+			"spriteSourceSize": {"x":0,"y":0,"w":40,"h":40},
+			"sourceSize": {"w":40,"h":40}
+		},
+		"musicOffOut": {
+			"frame": {"x":41, "y":0, "w":40, "h":40},
+			"spriteSourceSize": {"x":0,"y":0,"w":40,"h":40},
+			"sourceSize": {"w":40,"h":40}
+		},
+		"musicOffDown": {
+			"frame": {"x":0, "y":123, "w":40, "h":40},
+			"spriteSourceSize": {"x":0,"y":0,"w":40,"h":40},
+			"sourceSize": {"w":40,"h":40}
+		},
+		"musicOffHover": {
+			"frame": {"x":0, "y":82, "w":40, "h":40},
+			"spriteSourceSize": {"x":0,"y":0,"w":40,"h":40},
+			"sourceSize": {"w":40,"h":40}
+		},
+		"musicMute": {
+			"frame": {"x":123, "y":63, "w":28, "h":34},
+			"spriteSourceSize": {"x":6,"y":2,"w":40,"h":40},
+			"sourceSize": {"w":40,"h":40}
+		},
+		"musicNoMute": {
+			"frame": {"x":123, "y":98, "w":26, "h":29},
+			"spriteSourceSize": {"x":6,"y":5,"w":40,"h":40},
+			"sourceSize": {"w":40,"h":40}
+		}
+	}
+}
