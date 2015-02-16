@@ -1,3 +1,7 @@
+var dimensions = 6;
+var gap = 3;
+var tileSize = 50;
+
 export class Asteroid extends Phaser.Group {
 
 	constructor({game: game, group: group, position: position = 0, sizeW: sizeW = 1, sizeH: sizeH = 1, color: color = '#00f', callback: callback}) {
@@ -15,9 +19,6 @@ export class Asteroid extends Phaser.Group {
 	}
 
 	__init(position, sizeW, sizeH) {
-		var dimensions = 6;
-		var gap = 3;
-		var tileSize = 50;
 		// supposing a 6x6 board
 		var x = gap + (tileSize + gap) * (position % dimensions);
 		var y = gap + (tileSize + gap) * Math.floor(position / dimensions);
@@ -54,7 +55,7 @@ export class Asteroid extends Phaser.Group {
 	}
 
 	getRightTile() {
-		return this.position + this.sizeW - 1;
+		return (this.position + this.sizeW - 1);
 	}
 
 	getTopTile() {
@@ -62,6 +63,51 @@ export class Asteroid extends Phaser.Group {
 	}
 
 	getBottomTile() {
-		return this.position + (this.sizeH - 1) * 6;
+		return (this.position + (this.sizeH - 1) * 6);
 	}
-};
+
+	__isOccupied(occupiedTiles, index) {
+		return (occupiedTiles.indexOf(index) > -1);
+	}
+
+	canGoRight(occupiedTiles, index) {
+		index = index || this.getRightTile() + 1;
+		// the right boundary it's not on the right most tile
+		if (((this.getRightTile() % dimensions) != (dimensions - 1)) 
+			&& ((index % dimensions) != 0)) {
+			// check if the next tile is occupied
+			return !this.__isOccupied(occupiedTiles, index);
+		}
+		return false;
+	}
+
+	canGoLeft(occupiedTiles, index) {
+		index = index || this.getLeftTile() - 1;
+		// the left boundary it's not on the left most tile
+		if (((this.getLeftTile() % dimensions) != 0)
+			&& ((index % dimensions) != (dimensions - 1))) {
+			// check if the previous tile is occupied
+			return !this.__isOccupied(occupiedTiles, index);
+		}
+		return false;
+	}
+
+	getRightLimit(occupiedTiles) {
+		var i = this.getRightTile();		
+		while (this.canGoRight(occupiedTiles, i) && i < (dimensions * dimensions)) {
+			i++;
+		}
+		return i - this.sizeW;
+	}
+
+	getLeftLimit(occupiedTiles) {
+		var i = this.getLeftTile();	
+		if (this.canGoLeft(occupiedTiles, i)) {
+			while (this.canGoLeft(occupiedTiles, i) && i >= 0) {
+				i--;
+			}
+			i++;
+		}	
+		return i;
+	}
+}

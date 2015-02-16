@@ -34,8 +34,8 @@ export class Board extends Phaser.Group {
 			new Asteroid({game: this.game, position: 12, sizeW: 3, sizeH: 1, color: '#00f', callback: () => { this.move(2); } }),
 			new Asteroid({game: this.game, position: 18, sizeW: 1, sizeH: 2, color: '#9fc', callback: () => { this.move(3); } }),
 			new Asteroid({game: this.game, position: 22, sizeW: 1, sizeH: 2, color: '#9cf', callback: () => { this.move(4); } }),
-			new Asteroid({game: this.game, position: 30, sizeW: 3, sizeH: 1, color: '#93c', callback: () => { this.move(5); } }),
-			new Asteroid({game: this.game, position: 33, sizeW: 2, sizeH: 1, color: '#f90', callback: () => { this.move(6); } }),
+			new Asteroid({game: this.game, position: 30, sizeW: 4, sizeH: 1, color: '#93c', callback: () => { this.move(5); } }),
+			new Asteroid({game: this.game, position: 34, sizeW: 2, sizeH: 1, color: '#f90', callback: () => { this.move(6); } }),
 		];
 	}
 
@@ -45,16 +45,19 @@ export class Board extends Phaser.Group {
 		var destination = null;
 		// get the tiles of the other asteroids
 		var occupiedTiles = [];
-		for (var i = 0; i < this.asteroids.lenght; i++) {
+		for (var i = 0; i < this.asteroids.length; i++) {
 			if (i != index) occupiedTiles = occupiedTiles.concat(this.asteroids[i].getTiles());
 		}
-		console.log(occupiedTiles)
 		// if horizontal
 		if (asteroid.orientation === "horizontal") {
 			// by default tries to move right
-			console.log(asteroid.getRightTile())
-			for (var j = (asteroid.getRightTile() % this.numTiles); j < this.numTiles; j++) {
-				if (occupiedTiles.indexOf(asteroid.getRightTile() + j) > -1) destination = asteroid.getRightTile() + j;
+			if (asteroid.canGoRight(occupiedTiles)) {
+				console.debug("right")
+				destination = asteroid.getRightLimit(occupiedTiles);
+			}
+			else {
+				console.debug("left")
+				destination = asteroid.getLeftLimit(occupiedTiles);
 			}
 		}
 		console.debug(destination)
