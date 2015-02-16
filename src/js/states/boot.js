@@ -2,6 +2,7 @@ export class Boot extends Phaser.State {
 
 	preload() {
 		// load assets for the logo (will display while the full preload is executed)
+		this.game.load.image("1x1", require("../../assets/img/FFFFFF-0.png"));
 		this.game.load.image("logo", require("../../assets/img/logo.png"));
 		this.game.load.image("logoBright", require("../../assets/img/logo_bright.png"));
 	}
