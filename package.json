@@ -1,10 +1,9 @@
 {
   "name": "Phaserito",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "An HTML5 mind challenge puzzle game developed with Phaser.io",
   "author": "Lovely Dog Studio",
-  "google": {
-  },
+  "google": {},
   "contributors": [
     {
       "name": "Bernat Martinez"
