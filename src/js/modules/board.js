@@ -36,36 +36,44 @@ export class Board extends Phaser.Group {
 	}
 
 	move(index) {
-		var asteroid = this.asteroids[index];
+		// determine if we are moving the spaceship or an asteroid
+		var isAsteroid = (index >= 0);
+		var element = (isAsteroid) ? this.asteroids[index] : this.spaceship;
 		// will hold the destination
 		var destination = null;
-		// get the tiles of the other asteroids
-		var occupiedTiles = this.spaceship.getTiles();
+		// get the tiles of the other elements
+		var occupiedTiles = (isAsteroid) ? this.spaceship.getTiles() : [];
 		for (var i = 0; i < this.asteroids.length; i++) {
 			if (i != index) occupiedTiles = occupiedTiles.concat(this.asteroids[i].getTiles());
 		}
 		// if horizontal
-		if (asteroid.orientation === "horizontal") {
+		if (element.orientation === "horizontal") {
 			// by default tries to move right
-			if (asteroid.canGoRight(occupiedTiles)) {
-				destination = asteroid.getRightLimit(occupiedTiles);
+			if (element.canGoRight(occupiedTiles)) {
+				destination = element.getRightLimit(occupiedTiles);
 			}
 			// left
 			else {
-				destination = asteroid.getLeftLimit(occupiedTiles);
+				destination = element.getLeftLimit(occupiedTiles);
 			}
 		}
 		// vertical
 		else {
 			// by default tries to move up
-			if (asteroid.canGoUp(occupiedTiles)) {
-				destination = asteroid.getUpperLimit(occupiedTiles);
+			if (element.canGoUp(occupiedTiles)) {
+				destination = element.getUpperLimit(occupiedTiles);
 			}
 			// left
 			else {
-				destination = asteroid.getDownLimit(occupiedTiles);
+				destination = element.getDownLimit(occupiedTiles);
 			}
 		}
-		asteroid.moveTo(destination);
+		element.moveTo(destination);
+		// if it's the spaceship, check if it's on the exit tile
+		if (!isAsteroid) {
+			if (destination == this.exit.position) {
+				console.debug("YOU WIN!!!");
+			}
+		}
 	}
 };

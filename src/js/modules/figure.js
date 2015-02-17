@@ -75,7 +75,7 @@ export class Figure extends Phaser.Group {
 
 	// check if the figure can go right to the defined index or the next position
 	canGoRight(occupiedTiles, index) {
-		index = index || this.getRightTile() + 1;
+		index = (typeof index === "undefined") ? this.getRightTile() + 1 : index;
 		// the right boundary it's not on the right most tile
 		if (((this.getRightTile() % dimensions) != (dimensions - 1)) 
 			&& ((index % dimensions) != 0)) {
@@ -87,7 +87,7 @@ export class Figure extends Phaser.Group {
 
 	// check if the figure can go left to the defined index or the previous position
 	canGoLeft(occupiedTiles, index) {
-		index = index || this.getLeftTile() - 1;
+		index = (typeof index === "undefined") ? this.getLeftTile() - 1 : index;
 		// the left boundary it's not on the left most tile
 		if (((this.getLeftTile() % dimensions) != 0)
 			&& ((index % dimensions) != (dimensions - 1))) {
@@ -120,7 +120,7 @@ export class Figure extends Phaser.Group {
 
 	// check if the figure can go up to the defined index or the upper position
 	canGoUp(occupiedTiles, index) {
-		index = index || this.getTopTile() - dimensions;
+		index = (typeof index === "undefined") ? this.getTopTile() - dimensions : index;
 		// the tile to check is not out of bounds
 		if (index >= 0) {
 			// check if the index tile is occupied
@@ -131,7 +131,7 @@ export class Figure extends Phaser.Group {
 
 	// check if the figure can go down to the defined index or the position right below
 	canGoDown(occupiedTiles, index) {
-		index = index || this.getBottomTile() + dimensions;
+		index = (typeof index === "undefined") ? this.getBottomTile() + dimensions : index;
 		// the tile to check is not out of bounds
 		if (index < (dimensions * dimensions)) {
 			// check if the index tile is occupied
