@@ -1,6 +1,6 @@
 ﻿module.exports = function (lang) {
-	console.debug(require('./level1.json'))
 	return [
-		
+		require('./level1.js'),
+		require('./level2.js'),
 	];
 };
