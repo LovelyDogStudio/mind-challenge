@@ -1,4 +1,5 @@
 import {Board} from '../modules/board.js';
+import {Messages} from '../modules/messages.js';
 
 export class Play extends Phaser.State {
 	
@@ -6,6 +7,10 @@ export class Play extends Phaser.State {
 	}
 
 	create() {
+		// instantiate messages manager
+		this.messages = new Messages({game: this.game});
+		// promisify manager
+		Promise.promisifyAll(this.messages);
 	}
 
 	init(level) {
@@ -18,10 +23,17 @@ export class Play extends Phaser.State {
 						loadLevel(this.levels[level]);
 	}
 
+	// loads the next level or finishes the game if already on the last level
 	__loadNextLevel() {
 		var nextLevel = this.currentLevel + 1;
 		if (nextLevel < this.levels.length) {
-			this.game.state.restart(true, false, nextLevel);
+			// show end level modal
+			this.messages.
+				endLevelModalAsync().
+				then(() => {
+					// after the message load the new level
+					this.game.state.restart(true, false, nextLevel);
+			});
 		}
 		else {
 			console.debug("YOU FINISHED THE GAME!!!");
