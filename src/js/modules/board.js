@@ -23,18 +23,15 @@ export class Board extends Phaser.Group {
 			this.tiles[i] = new Tile({game: this.game, position: i});
 		}
 		// create exit
-		this.exit = new Exit({game: this.game});
+		this.exit = new Exit({game: this.game, position: 2});
 		// create spaceship
-		this.spaceship = new SpaceShip({game: this.game, position: 20});
+		this.spaceship = new SpaceShip({game: this.game, position: 26, callback: () => { this.move(-1); } });
 		// create asteroids
 		this.asteroids = [
-			new Asteroid({game: this.game, position: 3, sizeW: 3, sizeH: 1, color: 'yellow', callback: () => { this.move(0); } }),
-			new Asteroid({game: this.game, position: 11, sizeW: 1, sizeH: 3, color: 'green', callback: () => { this.move(1); } }),
-			new Asteroid({game: this.game, position: 12, sizeW: 3, sizeH: 1, color: 'blue', callback: () => { this.move(2); } }),
-			new Asteroid({game: this.game, position: 18, sizeW: 1, sizeH: 2, color: 'light-green', callback: () => { this.move(3); } }),
-			new Asteroid({game: this.game, position: 22, sizeW: 1, sizeH: 2, color: 'light-blue', callback: () => { this.move(4); } }),
-			new Asteroid({game: this.game, position: 30, sizeW: 3, sizeH: 1, color: 'purple', callback: () => { this.move(5); } }),
-			new Asteroid({game: this.game, position: 34, sizeW: 2, sizeH: 1, color: 'orange', callback: () => { this.move(6); } }),
+			new Asteroid({game: this.game, position: 0, sizeW: 1, sizeH: 2, color: 'light-green', callback: () => { this.move(0); } }),
+			new Asteroid({game: this.game, position: 3, sizeW: 3, sizeH: 1, color: 'blue', callback: () => { this.move(1); } }),
+			new Asteroid({game: this.game, position: 18, sizeW: 3, sizeH: 1, color: 'yellow', callback: () => { this.move(2); } }),
+			new Asteroid({game: this.game, position: 21, sizeW: 1, sizeH: 3, color: 'purple', callback: () => { this.move(3); } }),
 		];
 	}
 
@@ -51,15 +48,24 @@ export class Board extends Phaser.Group {
 		if (asteroid.orientation === "horizontal") {
 			// by default tries to move right
 			if (asteroid.canGoRight(occupiedTiles)) {
-				console.debug("right")
 				destination = asteroid.getRightLimit(occupiedTiles);
 			}
+			// left
 			else {
-				console.debug("left")
 				destination = asteroid.getLeftLimit(occupiedTiles);
 			}
 		}
-		console.debug(destination)
+		// vertical
+		else {
+			// by default tries to move up
+			if (asteroid.canGoUp(occupiedTiles)) {
+				destination = asteroid.getUpperLimit(occupiedTiles);
+			}
+			// left
+			else {
+				destination = asteroid.getDownLimit(occupiedTiles);
+			}
+		}
 		asteroid.moveTo(destination);
 	}
 };

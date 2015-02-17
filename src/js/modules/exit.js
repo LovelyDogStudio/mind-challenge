@@ -1,16 +1,11 @@
-export class Exit extends Phaser.Group {
+import {Figure} from './figure.js';
 
-	constructor({game: game, group: group}) {
+export class Exit extends Figure {
+
+	constructor({game: game, group: group, position: position = 2}) {
 		// call parent class
-		super(game, group, "exit");
-		// init
-		this.__init();
-	}
-
-	__init() {
-		// draw rectangle
-		this.element = new Phaser.Rectangle(109, 0, 50, 6);
-		// fill rectangle
-		this.game.debug.geom(this.element, '#f00');
+		super({game: game, group: group, position: position, color: "exit", name: "exit", resize: false});
+		// save position
+		this.position = position;
 	}
 };
