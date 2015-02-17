@@ -14,10 +14,9 @@ export class Board extends Phaser.Group {
 	}
 
 	__init() {
-		// draw rectangle
-		this.element = new Phaser.Rectangle(0, 0, 320, 320);
-		// fill rectangle
-		this.game.debug.geom(this.element, '#cccccc');
+		// draw board
+		this.board = this.game.add.sprite(0, 0, 'light-grey', this);
+		this.board.scale.set(320, 320);
 		// create tiles
 		this.tiles = [];
 		for (var i = 0; i < this.numTiles * this.numTiles; i++) {
@@ -29,13 +28,13 @@ export class Board extends Phaser.Group {
 		this.spaceship = new SpaceShip({game: this.game, position: 20});
 		// create asteroids
 		this.asteroids = [
-			new Asteroid({game: this.game, position: 3, sizeW: 3, sizeH: 1, color: '#ff3', callback: () => { this.move(0); } }),
-			new Asteroid({game: this.game, position: 11, sizeW: 1, sizeH: 3, color: '#396', callback: () => { this.move(1); } }),
-			new Asteroid({game: this.game, position: 12, sizeW: 3, sizeH: 1, color: '#00f', callback: () => { this.move(2); } }),
-			new Asteroid({game: this.game, position: 18, sizeW: 1, sizeH: 2, color: '#9fc', callback: () => { this.move(3); } }),
-			new Asteroid({game: this.game, position: 22, sizeW: 1, sizeH: 2, color: '#9cf', callback: () => { this.move(4); } }),
-			new Asteroid({game: this.game, position: 30, sizeW: 4, sizeH: 1, color: '#93c', callback: () => { this.move(5); } }),
-			new Asteroid({game: this.game, position: 34, sizeW: 2, sizeH: 1, color: '#f90', callback: () => { this.move(6); } }),
+			new Asteroid({game: this.game, position: 3, sizeW: 3, sizeH: 1, color: 'yellow', callback: () => { this.move(0); } }),
+			new Asteroid({game: this.game, position: 11, sizeW: 1, sizeH: 3, color: 'green', callback: () => { this.move(1); } }),
+			new Asteroid({game: this.game, position: 12, sizeW: 3, sizeH: 1, color: 'blue', callback: () => { this.move(2); } }),
+			new Asteroid({game: this.game, position: 18, sizeW: 1, sizeH: 2, color: 'light-green', callback: () => { this.move(3); } }),
+			new Asteroid({game: this.game, position: 22, sizeW: 1, sizeH: 2, color: 'light-blue', callback: () => { this.move(4); } }),
+			new Asteroid({game: this.game, position: 30, sizeW: 3, sizeH: 1, color: 'purple', callback: () => { this.move(5); } }),
+			new Asteroid({game: this.game, position: 34, sizeW: 2, sizeH: 1, color: 'orange', callback: () => { this.move(6); } }),
 		];
 	}
 
@@ -44,7 +43,7 @@ export class Board extends Phaser.Group {
 		// will hold the destination
 		var destination = null;
 		// get the tiles of the other asteroids
-		var occupiedTiles = [];
+		var occupiedTiles = this.spaceship.getTiles();
 		for (var i = 0; i < this.asteroids.length; i++) {
 			if (i != index) occupiedTiles = occupiedTiles.concat(this.asteroids[i].getTiles());
 		}
@@ -61,5 +60,6 @@ export class Board extends Phaser.Group {
 			}
 		}
 		console.debug(destination)
+		asteroid.moveTo(destination);
 	}
 };

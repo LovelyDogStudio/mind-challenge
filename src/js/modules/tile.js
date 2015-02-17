@@ -15,8 +15,7 @@ export class Tile extends Phaser.Group {
 		var x = gap + (tileSize + gap) * (position % dimensions);
 		var y = gap + (tileSize + gap) * Math.floor(position / dimensions);
 		// draw rectangle
-		this.element = new Phaser.Rectangle(x, y, tileSize, tileSize);
-		// fill rectangle
-		this.game.debug.geom(this.element, '#999');
+		this.tile = this.game.add.sprite(x, y, 'grey', this);
+		this.tile.scale.set(tileSize, tileSize);
 	}
 };
