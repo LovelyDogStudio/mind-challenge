@@ -11,6 +11,7 @@ export class Board extends Phaser.Group {
 		// init board
 		this.numTiles = 6;
 		this.__init();
+		console.debug(this.game.config.phaserito.levels)
 	}
 
 	__init() {

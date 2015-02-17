@@ -1,0 +1,12 @@
+{
+	"asteroids": [
+		{ "position": 0, "sizeW": 1, "sizeH": 1, "color": "yellow" },
+		{ "position": 20, "sizeW": 1, "sizeH": 1, "color": "yellow" }
+	],
+	"spaceship": {
+		"position": 29	
+	},
+	"exit": {
+		"position": 4
+	}
+}﻿

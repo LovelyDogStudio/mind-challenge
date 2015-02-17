@@ -4,6 +4,7 @@
 		atlases: require("./atlases/")(lang),
 		audiosprites: require("./audiosprites/index.js")(lang),
 		sprites: require("./sprites")(lang),
-		sounds: require("./sounds.js")(lang)
+		sounds: require("./sounds.js")(lang),
+		levels: require("./levels")(lang),
 	};
 }
