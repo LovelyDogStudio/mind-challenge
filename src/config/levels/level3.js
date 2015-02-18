@@ -1,13 +1,12 @@
 module.exports = {
 	asteroids: [
-		{ position: 3, sizeW: 3, sizeH: 1, color: "purple" },
-		{ position: 14, sizeW: 3, sizeH: 1, color: "yellow" },
-		{ position: 17, sizeW: 1, sizeH: 2, color: "blue" },
-		{ position: 21, sizeW: 1, sizeH: 2, color: "light-green" },
-		{ position: 28, sizeW: 2, sizeH: 1, color: "orange" },
+		{ position: 3, sizeW: 1, sizeH: 2, color: "orange" },
+		{ position: 12, sizeW: 3, sizeH: 1, color: "yellow" },
+		{ position: 15, sizeW: 1, sizeH: 3, color: "purple" },
+		{ position: 33, sizeW: 3, sizeH: 1, color: "blue" },
 	],
 	spaceship: {
-		position: 20
+		position: 26
 	},
 	exit: {
 		position: 2
