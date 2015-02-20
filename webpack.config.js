@@ -47,6 +47,7 @@ module.exports = {
 			PhaserDebug: 'phaser-debug-webpack-loader!imports?require=>false!phaser-debug',
 			PIXI: 'phaser-webpack-loader!exports?exports.PIXI!phaser',
 			Promise: 'bluebird',
+			Store: 'store',
 			Phaserito: 'phaserito'
 		}),
 		new StatsPlugin(path.join(__dirname, 'stats.json')),
