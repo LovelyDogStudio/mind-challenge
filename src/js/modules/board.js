@@ -18,13 +18,15 @@ export class Board extends Phaser.Group {
 
 	__init() {
 		// draw board
-		this.board = this.game.add.sprite(0, 0, 'light-grey', this);
+		this.board = this.create(0, 0, 'light-grey');
 		this.board.scale.set(320, 320);
 		// create tiles
 		this.tiles = [];
 		for (var i = 0; i < this.numTiles * this.numTiles; i++) {
-			this.tiles[i] = new Tile({game: this.game, position: i});
+			this.tiles[i] = new Tile({game: this.game, group: this, position: i});
 		}
+		// position group
+		this.y = 160;
 	}
 
 	// recieves a level configuration and builds the level accordingly
@@ -32,13 +34,13 @@ export class Board extends Phaser.Group {
 		// save level
 		this.level = level;
 		// create spaceship
-		this.spaceship = new SpaceShip({game: this.game, position: level.spaceship.position, callback: () => { this.move(-1); } });
+		this.spaceship = new SpaceShip({game: this.game, group: this, position: level.spaceship.position, callback: () => { this.move(-1); } });
 		// create asteroids
 		this.asteroids = level.asteroids.map((el, index) => {
-			return new Asteroid({game: this.game, position: el.position, sizeW: el.sizeW, sizeH: el.sizeH, color: el.color, callback: () => { this.move(index); } });
+			return new Asteroid({game: this.game, group: this, position: el.position, sizeW: el.sizeW, sizeH: el.sizeH, color: el.color, callback: () => { this.move(index); } });
 		});
 		// create exit
-		this.exit = new Exit({game: this.game, position: level.exit.position});
+		this.exit = new Exit({game: this.game, group: this, position: level.exit.position});
 	}
 
 	// move the clicked element

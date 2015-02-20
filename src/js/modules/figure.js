@@ -2,13 +2,12 @@ var dimensions = 6;
 var gap = 3;
 var tileSize = 50;
 
-export class Figure extends Phaser.Group {
+export class Figure {
 
 	constructor({game: game, group: group, position: position = 0, sizeW: sizeW = 1, sizeH: sizeH = 1, color: color = 'blue', callback: callback, name: name = "figure", resize: resize = true}) {
-		// call parent class
-		super(game, group, name);
 		// save properties
 		this.position = position;
+		this.group = group;
 		this.sizeW = sizeW;
 		this.sizeH = sizeH;
 		this.tileColor = color;
@@ -25,7 +24,7 @@ export class Figure extends Phaser.Group {
 		var width = tileSize * sizeW + (sizeW - 1) * gap;
 		var height = tileSize * sizeH +  (sizeH - 1) * gap;
 		// draw rectangle
-		this.image = this.game.add.sprite(x, y, this.tileColor, this);
+		this.image = this.group.create(x, y, this.tileColor);
 		resize && this.image.scale.set(width, height);
 		this.image.inputEnabled = true;
 		this.image.events.onInputDown.add(() => {

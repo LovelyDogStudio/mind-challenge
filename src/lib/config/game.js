@@ -17,8 +17,8 @@ module.exports = function (lang) {
 			// 		iPhone 5&6 aspect ratio 16:9
 			// 		iPad Mini & Air aspect ratio 4:3
 			canvas:{				
-				height: 320,
-				width: 480,
+				height: 480,
+				width: 320,
 				renderMode: Phaser.AUTO,
 				parent: '',
 				state: null,
