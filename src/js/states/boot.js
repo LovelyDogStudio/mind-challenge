@@ -12,6 +12,7 @@ export class Boot extends Phaser.State {
 		this.game.load.image("orange", require("../../assets/img/FF9900-1.png"));
 		this.game.load.image("grey", require("../../assets/img/999999-1.png"));
 		this.game.load.image("light-grey", require("../../assets/img/CCCCCC-1.png"));
+		this.game.load.image("veige", require("../../assets/img/808055-1.png"));		
 		this.game.load.image("exit", require("../../assets/img/exit.png"));
 		this.game.load.image("logo", require("../../assets/img/logo.png"));
 		this.game.load.image("logoBright", require("../../assets/img/logo_bright.png"));
