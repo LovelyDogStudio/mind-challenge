@@ -23,8 +23,8 @@ export class Loading extends Phaser.State {
 			// when everything's load, start the game
 			if (this.game.load.hasLoaded && logoIsDone) {
 				this.game.load.onLoadComplete.remove(loadCheck, this);
-				// start game at level 0
-				this.game.state.start('Play', true, false, 0);
+				// load the main screen
+				this.game.state.start('Main');
 			}
 		};
 
