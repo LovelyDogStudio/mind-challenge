@@ -25,7 +25,11 @@ export class Play extends Phaser.State {
 
 	// loads the next level or finishes the game if already on the last level
 	__loadNextLevel() {
+		// calculate the next level
 		var nextLevel = this.currentLevel + 1;
+		// unlock the next level and save the config
+		this.__unLockLevel(nextLevel);
+		// show the message and load the next level
 		if (nextLevel < this.levels.length) {
 			// show end level modal
 			this.messages.
@@ -38,5 +42,20 @@ export class Play extends Phaser.State {
 		else {
 			console.debug("YOU FINISHED THE GAME!!!");
 		}
+	}
+
+	__unLockLevel(level) {
+		var storedData = Store.get('mind-challenge-data');
+		// if no data is stored
+		if (!storedData) {
+			storedData = { unlocked: [] };
+		}
+		// if the level is not on the unlocked levels array
+		if (storedData.unlocked.indexOf(level) == -1) {
+			storedData.unlocked.push(level); 
+		}
+		// save data
+		console.debug(storedData)
+		Store.set('mind-challenge-data', storedData);
 	}
 }

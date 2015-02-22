@@ -8,6 +8,7 @@ import {LevelSelector} from '../modules/levelSelector.js';
 export class Main extends Phaser.State {
 
 	create() {
+		// build the level selector
 		this.levelSelector = new LevelSelector({game: this.game});
 	}
 };
