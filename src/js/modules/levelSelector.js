@@ -17,9 +17,8 @@ export class LevelSelector extends Phaser.Group {
 		// get the game's stored configuration
 		var storedData = Store.get('mind-challenge-data');
 		if (!storedData) {
-			Store.set('mind-challenge-data', {
-				unlocked: [0]
-			});
+			storedData = { unlocked: [0] };
+			Store.set('mind-challenge-data', storedData);
 		}
 		// create level icons
 		this.levels = [];
