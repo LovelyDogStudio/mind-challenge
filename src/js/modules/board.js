@@ -10,6 +10,7 @@ export class Board extends Phaser.Group {
 		super(game, group, "board");
 		// init board
 		this.numTiles = 6;
+		this.moves = 0;
 		// save callback
 		this.endLevelCallback = endLevelCallback;
 		// init environment
@@ -41,6 +42,8 @@ export class Board extends Phaser.Group {
 		});
 		// create exit
 		this.exit = new Exit({game: this.game, group: this, position: level.exit.position});
+		// return this for piping
+		return this;
 	}
 
 	// move the clicked element
@@ -77,7 +80,11 @@ export class Board extends Phaser.Group {
 				destination = element.getDownLimit(occupiedTiles);
 			}
 		}
+		// move element
 		element.moveTo(destination);
+		// increment moves
+		this.moves++;
+		this.__paintMoves();
 		// if it's the spaceship, check if it's on the exit tile
 		if (!isAsteroid) {
 			if (destination == this.exit.position) {
@@ -85,4 +92,36 @@ export class Board extends Phaser.Group {
 			}
 		}
 	}
+
+	showStats(levelNumber) {
+		// paint level number
+		this.__paintLevelNumber(levelNumber);
+		// paint moves
+		this.__paintMoves();
+		// return this for piping
+		return this;
+	}
+
+	__paintLevelNumber(levelNumber) {
+		if (typeof levelNumber !== "undefined") {
+			var text = "Level " + (levelNumber + 1);
+			var style = { font: '28px Roboto-Light', fill: "#fff", align: "center", stroke: "#000", strokeThickness: 2 };
+			// add text to the game
+			this.text = this.game.add.text(this.game.width / 2, 25, text, style);
+			// center text
+			this.text.anchor.set(0.5);		
+		}
+	}
+
+	__paintMoves() {
+		if (!this.moves) {
+			var style = { font: '18px Roboto-Light', fill: "#fff", align: "center", stroke: "#000", strokeThickness: 2 };
+			// add text to the game
+			this.text = this.game.add.text(25, 125, "Moves: 0", style);
+		}
+		else {
+			this.text.text = "Moves: " + this.moves;
+		}
+	}
+
 };
