@@ -94,17 +94,19 @@ export class Board extends Phaser.Group {
 	}
 
 	showStats(levelNumber) {
+		// save level number
+		this.levelNumber = levelNumber;
 		// paint level number
-		this.__paintLevelNumber(levelNumber);
+		this.__paintLevelNumber();
 		// paint moves
 		this.__paintMoves();
 		// return this for piping
 		return this;
 	}
 
-	__paintLevelNumber(levelNumber) {
-		if (typeof levelNumber !== "undefined") {
-			var text = "Level " + (levelNumber + 1);
+	__paintLevelNumber() {
+		if (typeof this.levelNumber !== "undefined") {
+			var text = "Level " + (this.levelNumber + 1);
 			var style = { font: '28px Roboto-Light', fill: "#fff", align: "center", stroke: "#000", strokeThickness: 2 };
 			// add text to the game
 			this.text = this.game.add.text(this.game.width / 2, 25, text, style);
@@ -124,4 +126,40 @@ export class Board extends Phaser.Group {
 		}
 	}
 
+	showUI() {
+		// create restart level button
+		this.__paintButton(200, 120, 110, 30, 'Restart level', 'light-grey', this.__restartLevel);
+		// create go to level selector button
+		this.__paintButton(200, 70, 110, 30, 'Go back', 'light-grey', this.__goToLevelSelector);
+		// return this for piping
+		return this;
+	}
+
+	__paintButton(x, y, width, height, text, color, callback) {
+		// create button image
+		var button = this.game.add.sprite(x, y, color);
+		button.scale.set(width, height);
+		// create button callback
+		button.inputEnabled = true;
+		button.events.onInputDown.add(callback, this);
+		// define text
+		var text = text;
+		var style = { font: '18px Roboto-Light', fill: "#fff", align: "center", stroke: "#000", strokeThickness: 2 };
+		// calculate position
+		var position = { x: x + (width / 2), y: y + (height / 2) };
+		// add text to the game
+		var buttonText = this.game.add.text(position.x, position.y, text, style);
+		// center text
+		buttonText.anchor.set(0.5);				
+	}
+
+	__restartLevel() {
+		// restart the current level
+		this.game.state.restart(true, false, this.levelNumber);
+	}
+
+	__goToLevelSelector() {
+		// go to the level loader
+		this.game.state.start('Main');		
+	}
 };

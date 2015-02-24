@@ -21,7 +21,8 @@ export class Play extends Phaser.State {
 		// Game begins
 		var board = new Board({game: this.game, endLevelCallback: () => { this.__loadNextLevel(); }}).
 						loadLevel(this.levels[level]).
-						showStats(level);
+						showStats(level).
+						showUI();
 	}
 
 	// loads the next level or finishes the game if already on the last level
