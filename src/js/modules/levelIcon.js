@@ -5,17 +5,17 @@ export class LevelIcon extends Icon {
 	constructor({ game: game, group: group, position: position = 0, callback: callback = () => {}, cols: cols, levelNumber: levelNumber = 0, storedData: storedData = null }) {
 		// save properties
 		this.game = game;
-		this.levelNumber = levelNumber || position + 1;
+		this.levelNumber = levelNumber || position;
 		// call parent class
 		super({game: game, group: group, position: position, sizeW: 1, sizeH: 1, color: "orange", callback: () => { this.unlocked && callback(); }, name: "icon"+position, cols: cols});
 		// control lock/unlock
-		this.unlocked = (storedData && (storedData.unlocked.indexOf(position) > -1));
+		this.unlocked = storedData.isUnLocked(this.levelNumber);
 		this.__paintLevelNumber();
 		(this.unlocked) ? this.__paintUnLocked() : this.__paintLocked();
 	}
 
 	__paintLevelNumber() {
-		var text = "" + this.levelNumber;
+		var text = "" + (this.levelNumber + 1);
 		var style = { font: '32px Roboto-Light', fill: "#fff", align: "center", stroke: "#000", strokeThickness: 6 };
 		// calculate position
 		var position = this.__getLevelNumberPosition();

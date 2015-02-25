@@ -2,15 +2,17 @@ import {Tile} from './tile.js';
 import {Exit} from './exit.js';
 import {SpaceShip} from './spaceship.js';
 import {Asteroid} from './asteroid.js';
+import {LevelUI} from './levelUI.js';
 
 export class Board extends Phaser.Group {
 
 	constructor({game: game, group: group, endLevelCallback: endLevelCallback}) {
-		// call parent class
-		super(game, group, "board");
-		// init board
+		// save properties
+		this.group = group;
 		this.numTiles = 6;
 		this.moves = 0;
+		// call parent class
+		super(game, group, "board");
 		// save callback
 		this.endLevelCallback = endLevelCallback;
 		// init environment
@@ -31,7 +33,7 @@ export class Board extends Phaser.Group {
 	}
 
 	// recieves a level configuration and builds the level accordingly
-	loadLevel(level) {
+	loadLevel(level, levelNumber) {
 		// save level
 		this.level = level;
 		// create spaceship
@@ -42,6 +44,8 @@ export class Board extends Phaser.Group {
 		});
 		// create exit
 		this.exit = new Exit({game: this.game, group: this, position: level.exit.position});
+		// create UI
+		this.ui = new LevelUI({game: this.game, group: this.group, levelNumber: levelNumber});
 		// return this for piping
 		return this;
 	}
@@ -83,8 +87,7 @@ export class Board extends Phaser.Group {
 		// move element
 		element.moveTo(destination);
 		// increment moves
-		this.moves++;
-		this.__paintMoves();
+		this.ui.updateMoves(++this.moves);
 		// if it's the spaceship, check if it's on the exit tile
 		if (!isAsteroid) {
 			if (destination == this.exit.position) {
@@ -93,73 +96,4 @@ export class Board extends Phaser.Group {
 		}
 	}
 
-	showStats(levelNumber) {
-		// save level number
-		this.levelNumber = levelNumber;
-		// paint level number
-		this.__paintLevelNumber();
-		// paint moves
-		this.__paintMoves();
-		// return this for piping
-		return this;
-	}
-
-	__paintLevelNumber() {
-		if (typeof this.levelNumber !== "undefined") {
-			var text = "Level " + (this.levelNumber + 1);
-			var style = { font: '28px Roboto-Light', fill: "#fff", align: "center", stroke: "#000", strokeThickness: 2 };
-			// add text to the game
-			this.text = this.game.add.text(this.game.width / 2, 25, text, style);
-			// center text
-			this.text.anchor.set(0.5);		
-		}
-	}
-
-	__paintMoves() {
-		if (!this.moves) {
-			var style = { font: '18px Roboto-Light', fill: "#fff", align: "center", stroke: "#000", strokeThickness: 2 };
-			// add text to the game
-			this.text = this.game.add.text(25, 125, "Moves: 0", style);
-		}
-		else {
-			this.text.text = "Moves: " + this.moves;
-		}
-	}
-
-	showUI() {
-		// create restart level button
-		this.__paintButton(200, 120, 110, 30, 'Restart level', 'light-grey', this.__restartLevel);
-		// create go to level selector button
-		this.__paintButton(200, 70, 110, 30, 'Go back', 'light-grey', this.__goToLevelSelector);
-		// return this for piping
-		return this;
-	}
-
-	__paintButton(x, y, width, height, text, color, callback) {
-		// create button image
-		var button = this.game.add.sprite(x, y, color);
-		button.scale.set(width, height);
-		// create button callback
-		button.inputEnabled = true;
-		button.events.onInputDown.add(callback, this);
-		// define text
-		var text = text;
-		var style = { font: '18px Roboto-Light', fill: "#fff", align: "center", stroke: "#000", strokeThickness: 2 };
-		// calculate position
-		var position = { x: x + (width / 2), y: y + (height / 2) };
-		// add text to the game
-		var buttonText = this.game.add.text(position.x, position.y, text, style);
-		// center text
-		buttonText.anchor.set(0.5);				
-	}
-
-	__restartLevel() {
-		// restart the current level
-		this.game.state.restart(true, false, this.levelNumber);
-	}
-
-	__goToLevelSelector() {
-		// go to the level loader
-		this.game.state.start('Main');		
-	}
 };

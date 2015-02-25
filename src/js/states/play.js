@@ -1,5 +1,6 @@
 import {Board} from '../modules/board.js';
 import {Messages} from '../modules/messages.js';
+import {DataStore} from '../modules/dataStore.js';
 
 export class Play extends Phaser.State {
 	
@@ -20,9 +21,7 @@ export class Play extends Phaser.State {
 		this.levels = this.game.config.phaserito.levels;
 		// Game begins
 		var board = new Board({game: this.game, endLevelCallback: () => { this.__loadNextLevel(); }}).
-						loadLevel(this.levels[level]).
-						showStats(level).
-						showUI();
+						loadLevel(this.levels[level], level);
 	}
 
 	// loads the next level or finishes the game if already on the last level
@@ -47,17 +46,7 @@ export class Play extends Phaser.State {
 	}
 
 	__unLockLevel(level) {
-		var storedData = Store.get('mind-challenge-data');
-		// if no data is stored
-		if (!storedData) {
-			storedData = { unlocked: [] };
-		}
-		// if the level is not on the unlocked levels array
-		if (storedData.unlocked.indexOf(level) == -1) {
-			storedData.unlocked.push(level); 
-		}
-		// save data
-		console.debug(storedData)
-		Store.set('mind-challenge-data', storedData);
+		// get data stored and unlock level
+		new DataStore().unLockLevel(level);
 	}
 }

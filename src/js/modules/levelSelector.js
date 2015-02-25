@@ -1,4 +1,5 @@
 import {LevelIcon} from './levelIcon.js';
+import {DataStore} from './dataStore.js';
 
 export class LevelSelector extends Phaser.Group {
 
@@ -15,11 +16,7 @@ export class LevelSelector extends Phaser.Group {
 
 	__init() {
 		// get the game's stored configuration
-		var storedData = Store.get('mind-challenge-data');
-		if (!storedData) {
-			storedData = { unlocked: [0] };
-			Store.set('mind-challenge-data', storedData);
-		}
+		var storedData = new DataStore();
 		// create level icons
 		this.levels = [];
 		for (var i = 0; (i < this.numCols * this.numCols) && i < this.numLevels; i++) {
