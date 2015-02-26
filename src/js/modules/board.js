@@ -91,6 +91,9 @@ export class Board extends Phaser.Group {
 		// if it's the spaceship, check if it's on the exit tile
 		if (!isAsteroid) {
 			if (destination == this.exit.position) {
+				// update best move
+				this.ui.updateBest(this.moves);
+				// load next level
 				this.endLevelCallback && this.endLevelCallback();
 			}
 		}

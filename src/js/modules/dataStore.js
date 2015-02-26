@@ -53,4 +53,8 @@ export class DataStore {
 		return this.storedData;
 	}
 
+	setData(data) {
+		this.storedData = data;
+	}
+
 };

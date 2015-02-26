@@ -40,6 +40,15 @@ export class LevelUI extends Phaser.Group {
 		this.__paintMoves();
 	}
 
+	updateBest(moves) {
+		// init data store
+		var storedData = new DataStore();
+		// save best moves
+		storedData.setBestMove(this.levelNumber, moves);
+		// save data
+		storedData.save();
+	}
+
 	__paintLevelNumber() {
 		if (typeof this.levelNumber !== "undefined") {
 			var text = "Level " + (this.levelNumber + 1);
