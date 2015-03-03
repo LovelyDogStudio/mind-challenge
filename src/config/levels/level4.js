@@ -11,5 +11,6 @@ module.exports = {
 	},
 	exit: {
 		position: 1
-	}
+	},
+	stars: [8,9,15]
 }﻿
