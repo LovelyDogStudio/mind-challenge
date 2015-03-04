@@ -10,8 +10,12 @@ export class LevelIcon extends Icon {
 		super({game: game, group: group, position: position, sizeW: 1, sizeH: 1, color: "orange", callback: () => { this.unlocked && callback(); }, name: "icon"+position, cols: cols});
 		// control lock/unlock
 		this.unlocked = storedData.isUnLocked(this.levelNumber);
-		this.__paintLevelNumber();
-		(this.unlocked) ? this.__paintUnLocked() : this.__paintLocked();
+		if (!this.unlocked) this.__paintLocked();
+		// control stars
+		this.best = storedData.getBestMove(this.levelNumber);
+		this.__paintStars();
+		// paint level number
+		this.__paintLevelNumber();		
 	}
 
 	__paintLevelNumber() {
@@ -45,6 +49,31 @@ export class LevelIcon extends Icon {
 			// create sprite
 			this.lock = this.group.create(position.x, position.y, 'unlock').anchor.set(0.5);
 		}
+	}
+
+	__paintStars() {
+		var level = this.game.config.phaserito.levels[this.levelNumber];
+		for (var i = 0, l = level.stars.length; i < l; i++) {
+			(this.best && this.best <= level.stars[i]) ? this.__paintStarFull(i) : this.__paintStarEmpty(i);
+		}		
+	}
+
+	__paintStarFull(position) {
+		// calculate position
+		var pos = this.__calcCoordinatesFromPosition(position);
+		// create sprite
+		this.group.create(pos.x, pos.y, 'star-full').anchor.set(0.5);
+	}
+
+	__paintStarEmpty(position) {
+		// calculate position
+		var pos = this.__calcCoordinatesFromPosition(position);
+		// create sprite
+		this.group.create(pos.x, pos.y, 'star-empty').anchor.set(0.5);
+	}
+
+	__calcCoordinatesFromPosition(position) {
+		return {x: this.image.x + this.image.width - 5 - position * 25, y: this.image.y + this.image.height};
 	}
 
 	__getLevelNumberPosition() {

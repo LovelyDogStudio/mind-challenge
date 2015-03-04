@@ -29,7 +29,7 @@ export class DataStore {
 
 	setBestMove(level, bestMove) {
 		if (this.storedData.levels[level]
-			|| this.storedData.levels[level].unlocked) {
+			&& this.storedData.levels[level].unlocked) {
 			this.storedData.levels[level].best = bestMove;
 			this.save();
 		}
@@ -37,7 +37,7 @@ export class DataStore {
 
 	getBestMove(level) {
 		if (this.storedData.levels[level]
-			|| this.storedData.levels[level].unlocked) {
+			&& this.storedData.levels[level].unlocked) {
 			return this.storedData.levels[level].best;
 		}
 		else {
