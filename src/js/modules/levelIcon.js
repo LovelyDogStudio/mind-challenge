@@ -8,14 +8,14 @@ export class LevelIcon extends Icon {
 		this.levelNumber = levelNumber || position;
 		// call parent class
 		super({game: game, group: group, position: position, sizeW: 1, sizeH: 1, color: "orange", callback: () => { this.unlocked && callback(); }, name: "icon"+position, cols: cols});
+		// paint level number
+		this.__paintLevelNumber();		
 		// control lock/unlock
 		this.unlocked = storedData.isUnLocked(this.levelNumber);
 		if (!this.unlocked) this.__paintLocked();
 		// control stars
 		this.best = storedData.getBestMove(this.levelNumber);
-		this.__paintStars();
-		// paint level number
-		this.__paintLevelNumber();		
+		if (this.unlocked) this.__paintStars();
 	}
 
 	__paintLevelNumber() {
@@ -26,7 +26,7 @@ export class LevelIcon extends Icon {
 		// add text to the game
 		this.text = this.game.add.text(position.x, position.y, text, style);
 		// center text
-		this.text.anchor.set(0.5);		
+		this.text.anchor.set(0.5);
 		// if in group, add the text to it
 		this.group && this.group.add(this.text);
 	}
@@ -38,6 +38,8 @@ export class LevelIcon extends Icon {
 			var position = this.__getLockPosition();
 			// create sprite
 			this.lock = this.group.create(position.x, position.y, 'lock').anchor.set(0.5);
+			// set alpha to the text
+			this.text.alpha = 0.4;
 		}
 	}
 
@@ -73,24 +75,20 @@ export class LevelIcon extends Icon {
 	}
 
 	__calcCoordinatesFromPosition(position) {
-		return {x: this.image.x + this.image.width - 5 - position * 25, y: this.image.y + this.image.height};
+		return {x: this.image.x + this.image.width - 7 - position * 23, y: this.image.y + this.image.height};
 	}
 
 	__getLevelNumberPosition() {
 		return {
 			x: this.image.x + (this.image.width / 2),
-			y: this.image.y + (this.image.height / 2) - 5
+			y: this.image.y + (this.image.height / 2)
 		};
 	}
 
 	__getLockPosition() {
 		return {
 			x: this.image.x + (this.image.width / 2),
-			y: this.image.y + this.image.height - 2
+			y: this.image.y + (this.image.height - 2)
 		};
-	}
-
-	unlock() {
-
 	}
 };
