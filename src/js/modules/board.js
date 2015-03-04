@@ -42,6 +42,12 @@ export class Board extends Phaser.Group {
 		this.asteroids = level.asteroids.map((el, index) => {
 			return new Asteroid({game: this.game, group: this, position: el.position, sizeW: el.sizeW, sizeH: el.sizeH, color: el.color, callback: () => { this.move(index); } });
 		});
+		// create blocks
+		if (level.blocks) {
+			level.blocks.map((el, index) => {
+				this.asteroids.push(new Asteroid({game: this.game, group: this, position: el.position, sizeW: el.sizeW, sizeH: el.sizeH, color: el.color, callback: () => {} }));
+			});
+		}
 		// create exit
 		this.exit = new Exit({game: this.game, group: this, position: level.exit.position});
 		// create UI

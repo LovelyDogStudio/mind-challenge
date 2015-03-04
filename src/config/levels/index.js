@@ -10,5 +10,7 @@
 		require('./level8.js'),
 		require('./level9.js'),
 		require('./level10.js'),
+		require('./level11.js'),
+		require('./level12.js'),
 	];
 };

@@ -9,8 +9,8 @@ module.exports = {
 		{ position: 21, sizeW: 1, sizeH: 3, color: "purple" },
 	],
 	blocks: [
-		{ position: 30, sizeW: 1, sizeH: 1, color: "grey" },
-		{ position: 35, sizeW: 1, sizeH: 1, color: "grey" },
+		{ position: 10, sizeW: 1, sizeH: 1, color: "light-grey" },
+		{ position: 35, sizeW: 1, sizeH: 1, color: "light-grey" },
 	],
 	spaceship: {
 		position: 26
